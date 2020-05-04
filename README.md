@@ -1,16 +1,36 @@
 ## JWT Decoder
 
-A new Flutter package project.
 You can use this library to decode a Json Web Token.
 You can also know if the token is already expired or not.
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+#### Decode a token
+```dart
+main() {
+  String yourToken = "Your JWT";
+  Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);
+  
+  // If the token has a valid format, you will get a Map<String, dynamic>
+  // Your decoded token can look like:
+  // { 
+  //    "sub": "1234567890", 
+  //    "name": "Gustavo", 
+  //    "iat": 1516239022, 
+  //    "exp": 1516239022, 
+  //    "randomKey": "something else" 
+  // }
+}
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Know if the token is expired
+```dart
+main() {
+  String yourToken = "Your JWT";
+  bool hasExpired = JwtDecoder.isExpired(yourToken);
+  
+  // You will get a true / false response
+  // true: if the token is already expired
+  // false: if the token is not expired
+}
+```
