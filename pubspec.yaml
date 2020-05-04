@@ -1,7 +1,6 @@
 name: jwt_decoder
 description: Json Web Tokens decoder.
 version: 1.0.0
-author: Gustavo Velazquez Moctezuma
 homepage: https://github.com/gustavo0197
 
 environment:
