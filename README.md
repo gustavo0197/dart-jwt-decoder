@@ -1,7 +1,8 @@
 ## JWT Decoder
 
-You can use this library to decode a Json Web Token.
-You can also know if the token is already expired or not.
+This is a small library for decoding a json web token for dart / flutter. Since the header and payload is base64 encoded you can easily know the stored data with no password, you can also know if the token is expired or not.
+
+If you like this library there's a version for Vue [here](https://github.com/gustavo0197/vue-easy-jwt).
 
 ## Getting Started
 
