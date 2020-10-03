@@ -6,3 +6,5 @@
 ## [1.0.1] - Example file
 
 - An example file was added
+
+## [1.0.2] - License was added
