@@ -26,4 +26,14 @@ void main() {
   test("isExpired? Invalid token", () {
     expect(JwtDecoder.isExpired("lñaslksa"), true);
   });
+
+  test("Expiration date", () {
+    print(JwtDecoder.getExpirationDate(token));
+    expect(
+        JwtDecoder.getExpirationDate(token).isAfter(new DateTime.now()), true);
+  });
+
+  test("Expiration time", () {
+    expect(JwtDecoder.getTokenTime(token).inDays, greaterThan(1));
+  });
 }
