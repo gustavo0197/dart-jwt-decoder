@@ -28,7 +28,6 @@ void main() {
   });
 
   test("Expiration date", () {
-    print(JwtDecoder.getExpirationDate(token));
     expect(
         JwtDecoder.getExpirationDate(token).isAfter(new DateTime.now()), true);
   });
