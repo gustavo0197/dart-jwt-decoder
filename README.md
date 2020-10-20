@@ -52,7 +52,7 @@ main () {
 }
 ```
 
-#### Get time since the token was created
+#### You can know how old your token is
 
 ```dart
 // Token payload must include an 'iat' field
