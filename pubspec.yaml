@@ -1,6 +1,6 @@
 name: jwt_decoder
 description: This small library helps you to decode Json Web Tokens, you can also know if a JWT is already expired.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/gustavo0197/dart-jwt-decoder
 
 environment:

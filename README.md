@@ -47,8 +47,21 @@ main () {
   String yourToken = "Your JWT";
   DateTime expirationDate = JwtDecoder.getExpirationDate(token);
 
-  // 2120-01-13 13:04:18.000
+  // 2025-01-13 13:04:18.000
   print(expirationDate);
+}
+```
+
+#### Get time since the token was created
+
+```dart
+// Token payload must include an 'iat' field
+main () {
+  String yourToken = "Your JWT";
+  Duration tokenTime = JwtDecoder.getTokenTime(token);
+
+  // 15
+  print(tokenTime.inDays);
 }
 ```
 

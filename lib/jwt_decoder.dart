@@ -37,7 +37,6 @@ class JwtDecoder {
         return true;
       }
     } catch (error) {
-      print(error);
       return true;
     }
   }
