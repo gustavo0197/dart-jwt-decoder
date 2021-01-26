@@ -28,9 +28,10 @@ class JwtDecoder {
       final Map<String, dynamic> decodedToken = decode(token);
       if (decodedToken != null) {
         // Get the expiration date
+        //exp must convert to integer because after decode will be respone double
         final DateTime expirationDate =
             new DateTime.fromMillisecondsSinceEpoch(0)
-                .add(new Duration(seconds: decodedToken["exp"]));
+                .add(new Duration(seconds: decodedToken["exp"].toInt()));
         // If the current date is after the expiration date, the token is already expired
         return new DateTime.now().isAfter(expirationDate);
       } else {
@@ -46,7 +47,7 @@ class JwtDecoder {
 
     if (decodedToken != null) {
       final DateTime expirationDate = new DateTime.fromMillisecondsSinceEpoch(0)
-          .add(new Duration(seconds: decodedToken['exp']));
+          .add(new Duration(seconds: decodedToken['exp'].toInt()));
       return expirationDate;
     } else {
       return null;
