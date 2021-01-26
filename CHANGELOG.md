@@ -13,3 +13,6 @@
 
 - getExpirationDate() returns the expiration date of the token
 - getTokenTime() you can use this method to know how old your token is
+
+# [1.0.4] - Minor improvements
+- isExpired() and getExpirationDate() the expiration time is converted to int
