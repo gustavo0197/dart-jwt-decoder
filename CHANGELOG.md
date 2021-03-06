@@ -14,5 +14,13 @@
 - getExpirationDate() returns the expiration date of the token
 - getTokenTime() you can use this method to know how old your token is
 
-# [1.0.4] - Minor improvements
+## [1.0.4] - Minor improvements
+
 - isExpired() and getExpirationDate() the expiration time is converted to int
+
+## [2.0.0] - Migration to null safety
+
+- Updated SDK dependency version to 2.12.0+
+- Avoid all null returns and replaced them with `FormatException` throws when tokens are not valid. This is a breaking change as users expecting null returns will now get an exception instead.
+- Added `JwtDecoder` methods documentation.
+- Replaced flutter framework dependencies to Dart only dependency.
