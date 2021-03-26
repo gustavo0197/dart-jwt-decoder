@@ -24,3 +24,5 @@
 - Avoid all null returns and replaced them with `FormatException` throws when tokens are not valid. This is a breaking change as users expecting null returns will now get an exception instead.
 - Added `JwtDecoder` methods documentation.
 - Replaced flutter framework dependencies to Dart only dependency.
+
+## [2.0.1] - getRemainingTime() method
