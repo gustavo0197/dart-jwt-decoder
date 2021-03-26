@@ -15,16 +15,14 @@ void main() {
     test("an invalid token", () {
       expect(
         () => JwtDecoder.decode(""),
-        throwsA(isA<FormatException>()
-            .having((e) => e.message, 'message', 'Invalid token')),
+        throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid token')),
       );
     });
 
     test("an invalid payload", () {
       expect(
         () => JwtDecoder.decode("a.b.c"),
-        throwsA(isA<FormatException>()
-            .having((e) => e.message, 'message', 'Invalid payload')),
+        throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid payload')),
       );
     });
   });
@@ -54,21 +52,18 @@ void main() {
   test("isExpired? Invalid token", () {
     expect(
       () => JwtDecoder.isExpired("lñaslksa"),
-      throwsA(isA<FormatException>()
-          .having((e) => e.message, 'message', 'Invalid token')),
+      throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid token')),
     );
   });
 
   test("Expiration date", () {
-    expect(
-        JwtDecoder.getExpirationDate(token).isAfter(new DateTime.now()), true);
+    expect(JwtDecoder.getExpirationDate(token).isAfter(new DateTime.now()), true);
   });
 
   test("Expiration date with invalid token", () {
     expect(
       () => JwtDecoder.getExpirationDate("an.invalid.payload"),
-      throwsA(isA<FormatException>()
-          .having((e) => e.message, 'message', 'Invalid payload')),
+      throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid payload')),
     );
   });
 
@@ -79,8 +74,11 @@ void main() {
   test("Expiration time with invalid token", () {
     expect(
       () => JwtDecoder.getTokenTime("invalid.token"),
-      throwsA(isA<FormatException>()
-          .having((e) => e.message, 'message', 'Invalid token')),
+      throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid token')),
     );
+  });
+
+  test("Remaining time from now", () {
+    expect(JwtDecoder.getRemainingTime(token).inSeconds, greaterThan(0));
   });
 }
