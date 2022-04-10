@@ -31,3 +31,4 @@
 
 - Makes `isExpired` return false when when there's no `exp` claim.
 - Makes both `getExpirationDate` and `getRemainingTime` return null when there's no `exp` claim.
+- Makes `getTokenTime` return null when there's no `iat` claim.
