@@ -5,6 +5,8 @@ const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ikd1c3Rhdm8iLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6NDczNDYxNTg1OH0.hh-TTBPS8z-UxdmfXWn7AwW2y_Lq3aPnlIQdqV2KEC4";
 const expiredToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MjYyMzkwMjJ9.GMdV0dx1F8rZuHUebeXL5tR2DROlc03IuDc2DeDTExI";
+const tokenWithoutExpirationTime =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
 
 void main() {
   group('Decode', () {
@@ -45,6 +47,10 @@ void main() {
     expect(JwtDecoder.isExpired(token), false);
   });
 
+  test("token without exp claim is not expired", () {
+    expect(JwtDecoder.isExpired(tokenWithoutExpirationTime), false);
+  });
+
   test("isExpired? Valid but expired token", () {
     expect(JwtDecoder.isExpired(expiredToken), true);
   });
@@ -57,7 +63,11 @@ void main() {
   });
 
   test("Expiration date", () {
-    expect(JwtDecoder.getExpirationDate(token).isAfter(new DateTime.now()), true);
+    expect(JwtDecoder.getExpirationDate(token)!.isAfter(new DateTime.now()), true);
+  });
+
+  test("expiration date from token without exp claim is null", () {
+    expect(JwtDecoder.getExpirationDate(tokenWithoutExpirationTime), isNull);
   });
 
   test("Expiration date with invalid token", () {
@@ -79,6 +89,10 @@ void main() {
   });
 
   test("Remaining time from now", () {
-    expect(JwtDecoder.getRemainingTime(token).inSeconds, greaterThan(0));
+    expect(JwtDecoder.getRemainingTime(token)!.inSeconds, greaterThan(0));
+  });
+
+  test("remaining time from token without exp claim is null", () {
+    expect(JwtDecoder.getRemainingTime(token)!.inSeconds, greaterThan(0));
   });
 }

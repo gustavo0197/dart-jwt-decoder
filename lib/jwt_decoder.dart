@@ -51,6 +51,9 @@ class JwtDecoder {
   /// Throws [FormatException] if parameter is not a valid JWT token.
   static bool isExpired(String token) {
     final expirationDate = getExpirationDate(token);
+    if (expirationDate == null) {
+      return false;
+    }
     // If the current date is after the expiration date, the token is already expired
     return DateTime.now().isAfter(expirationDate);
   }
@@ -58,12 +61,13 @@ class JwtDecoder {
   /// Returns token expiration date
   ///
   /// Throws [FormatException] if parameter is not a valid JWT token.
-  static DateTime getExpirationDate(String token) {
+  static DateTime? getExpirationDate(String token) {
     final decodedToken = decode(token);
-
-    final expirationDate = DateTime.fromMillisecondsSinceEpoch(0)
-        .add(Duration(seconds: decodedToken['exp'].toInt()));
-    return expirationDate;
+    final expiration = decodedToken['exp'] as int?;
+    if (expiration == null) {
+      return null;
+    }
+    return DateTime.fromMillisecondsSinceEpoch(expiration * 1000);
   }
 
   /// Returns token issuing date (iat)
@@ -80,8 +84,11 @@ class JwtDecoder {
   /// Returns remaining time until expiry date.
   ///
   /// Throws [FormatException] if parameter is not a valid JWT token.
-  static Duration getRemainingTime(String token) {
+  static Duration? getRemainingTime(String token) {
     final expirationDate = getExpirationDate(token);
+    if (expirationDate == null) {
+      return null;
+    }
 
     return expirationDate.difference(DateTime.now());
   }
