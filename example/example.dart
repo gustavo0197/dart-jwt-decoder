@@ -26,6 +26,8 @@ main() {
   }
 
   /* getTokenTime() - You can use this method to know how old your token is */
-  Duration tokenTime = JwtDecoder.getTokenTime(token);
-  print(tokenTime.inDays);
+  Duration? tokenTime = JwtDecoder.getTokenTime(token);
+  if (tokenTime != null) {
+    print(tokenTime.inDays);
+  }
 }

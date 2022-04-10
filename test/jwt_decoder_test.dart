@@ -7,6 +7,7 @@ const expiredToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MjYyMzkwMjJ9.GMdV0dx1F8rZuHUebeXL5tR2DROlc03IuDc2DeDTExI";
 const tokenWithoutExpirationTime =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+const tokenWithoutIatClaim = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0.Gfx6VO9tcxwk6xqx9yYzSfebfeakZp5JYIgP_edcw_A";
 
 void main() {
   group('Decode', () {
@@ -78,7 +79,11 @@ void main() {
   });
 
   test("Expiration time", () {
-    expect(JwtDecoder.getTokenTime(token).inDays, greaterThan(1));
+    expect(JwtDecoder.getTokenTime(token)!.inDays, greaterThan(1));
+  });
+
+  test("token time from token without iat claim is null", () {
+    expect(JwtDecoder.getTokenTime(tokenWithoutIatClaim), isNull);
   });
 
   test("Expiration time with invalid token", () {

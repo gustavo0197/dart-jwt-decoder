@@ -58,26 +58,30 @@ class JwtDecoder {
     return DateTime.now().isAfter(expirationDate);
   }
 
-  /// Returns token expiration date
-  ///
-  /// Throws [FormatException] if parameter is not a valid JWT token.
-  static DateTime? getExpirationDate(String token) {
+  static DateTime? _getDate({required String token, required String claim}) {
     final decodedToken = decode(token);
-    final expiration = decodedToken['exp'] as int?;
+    final expiration = decodedToken[claim] as int?;
     if (expiration == null) {
       return null;
     }
     return DateTime.fromMillisecondsSinceEpoch(expiration * 1000);
   }
 
+  /// Returns token expiration date
+  ///
+  /// Throws [FormatException] if parameter is not a valid JWT token.
+  static DateTime? getExpirationDate(String token) {
+    return _getDate(token: token, claim: 'exp');
+  }
+
   /// Returns token issuing date (iat)
   ///
   /// Throws [FormatException] if parameter is not a valid JWT token.
-  static Duration getTokenTime(String token) {
-    final decodedToken = decode(token);
-
-    final issuedAtDate = DateTime.fromMillisecondsSinceEpoch(0)
-        .add(Duration(seconds: decodedToken["iat"]));
+  static Duration? getTokenTime(String token) {
+    final issuedAtDate = _getDate(token: token, claim: 'iat');
+    if (issuedAtDate == null) {
+      return null;
+    }
     return DateTime.now().difference(issuedAtDate);
   }
 
