@@ -1,28 +1,33 @@
-## [1.0.0] - decode() and isExpired() methods
+# [2.0.1] 
 
-- decode method will decode your token's payload and return a Map<String, dynamic>
-- isExpired method is used to know if a token is already expired or not
+- getRemainingTime() method
 
-## [1.0.1] - Example file
+# [2.0.0]
 
-- An example file was added
-
-## [1.0.2] - License was added
-
-## [1.0.3] - getExpirationDate() and getTokenTime() methods
-
-- getExpirationDate() returns the expiration date of the token
-- getTokenTime() you can use this method to know how old your token is
-
-## [1.0.4] - Minor improvements
-
-- isExpired() and getExpirationDate() the expiration time is converted to int
-
-## [2.0.0] - Migration to null safety
-
+- Migration to null safety
 - Updated SDK dependency version to 2.12.0+
 - Avoid all null returns and replaced them with `FormatException` throws when tokens are not valid. This is a breaking change as users expecting null returns will now get an exception instead.
 - Added `JwtDecoder` methods documentation.
 - Replaced flutter framework dependencies to Dart only dependency.
 
-## [2.0.1] - getRemainingTime() method
+# [1.0.4] 
+
+- isExpired() and getExpirationDate() the expiration time is converted to int
+
+# [1.0.3] 
+
+- getExpirationDate() returns the expiration date of the token
+- getTokenTime() you can use this method to know how old your token is
+
+# [1.0.2] 
+
+- License was added
+
+# [1.0.1] 
+
+- An example file was added
+
+# [1.0.0] 
+
+- decode method will decode your token's payload and return a Map<String, dynamic>
+- isExpired method is used to know if a token is already expired or not
