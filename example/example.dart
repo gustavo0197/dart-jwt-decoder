@@ -19,14 +19,15 @@ main() {
   }
 
   /* getExpirationDate() - this method returns the expiration date of the token */
-  DateTime expirationDate = JwtDecoder.getExpirationDate(token);
-
-  // 2025-01-13 13:04:18.000
-  print(expirationDate);
+  DateTime? expirationDate = JwtDecoder.getExpirationDate(token);
+  if (expirationDate != null) {
+    // 2120-01-13 16:04:18.000
+    print(expirationDate);
+  }
 
   /* getTokenTime() - You can use this method to know how old your token is */
-  Duration tokenTime = JwtDecoder.getTokenTime(token);
-
-  // 15
-  print(tokenTime.inDays);
+  Duration? tokenTime = JwtDecoder.getTokenTime(token);
+  if (tokenTime != null) {
+    print(tokenTime.inDays);
+  }
 }

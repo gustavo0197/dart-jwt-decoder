@@ -1,3 +1,9 @@
+# [2.0.2] - Changes expiration date's API
+
+- Makes `isExpired` return false when when there's no `exp` claim.
+- Makes both `getExpirationDate` and `getRemainingTime` return null when there's no `exp` claim.
+- Makes `getTokenTime` return null when there's no `iat` claim.
+
 # [2.0.1] 
 
 - getRemainingTime() method
