@@ -45,7 +45,7 @@ main () {
 ```dart
 main () {
   String yourToken = "Your JWT";
-  DateTime expirationDate = JwtDecoder.getExpirationDate(token);
+  DateTime expirationDate = JwtDecoder.getExpirationDate(yourToken);
 
   // 2025-01-13 13:04:18.000
   print(expirationDate);
@@ -58,7 +58,7 @@ main () {
 // Token payload must include an 'iat' field
 main () {
   String yourToken = "Your JWT";
-  Duration tokenTime = JwtDecoder.getTokenTime(token);
+  Duration tokenTime = JwtDecoder.getTokenTime(yourToken);
 
   // 15
   print(tokenTime.inDays);
