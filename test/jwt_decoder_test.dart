@@ -7,7 +7,8 @@ const expiredToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MjYyMzkwMjJ9.GMdV0dx1F8rZuHUebeXL5tR2DROlc03IuDc2DeDTExI";
 const tokenWithoutExpirationTime =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
-const tokenWithoutIatClaim = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0.Gfx6VO9tcxwk6xqx9yYzSfebfeakZp5JYIgP_edcw_A";
+const tokenWithoutIatClaim =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0.Gfx6VO9tcxwk6xqx9yYzSfebfeakZp5JYIgP_edcw_A";
 
 void main() {
   group('Decode', () {
@@ -18,14 +19,16 @@ void main() {
     test("an invalid token", () {
       expect(
         () => JwtDecoder.decode(""),
-        throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid token')),
+        throwsA(isA<FormatException>()
+            .having((e) => e.message, 'message', 'Invalid token')),
       );
     });
 
     test("an invalid payload", () {
       expect(
         () => JwtDecoder.decode("a.b.c"),
-        throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid payload')),
+        throwsA(isA<FormatException>()
+            .having((e) => e.message, 'message', 'Invalid payload')),
       );
     });
   });
@@ -59,12 +62,14 @@ void main() {
   test("isExpired? Invalid token", () {
     expect(
       () => JwtDecoder.isExpired("lñaslksa"),
-      throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid token')),
+      throwsA(isA<FormatException>()
+          .having((e) => e.message, 'message', 'Invalid token')),
     );
   });
 
   test("Expiration date", () {
-    expect(JwtDecoder.getExpirationDate(token)!.isAfter(new DateTime.now()), true);
+    expect(
+        JwtDecoder.getExpirationDate(token)!.isAfter(new DateTime.now()), true);
   });
 
   test("expiration date from token without exp claim is null", () {
@@ -74,7 +79,8 @@ void main() {
   test("Expiration date with invalid token", () {
     expect(
       () => JwtDecoder.getExpirationDate("an.invalid.payload"),
-      throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid payload')),
+      throwsA(isA<FormatException>()
+          .having((e) => e.message, 'message', 'Invalid payload')),
     );
   });
 
@@ -89,7 +95,8 @@ void main() {
   test("Expiration time with invalid token", () {
     expect(
       () => JwtDecoder.getTokenTime("invalid.token"),
-      throwsA(isA<FormatException>().having((e) => e.message, 'message', 'Invalid token')),
+      throwsA(isA<FormatException>()
+          .having((e) => e.message, 'message', 'Invalid token')),
     );
   });
 
