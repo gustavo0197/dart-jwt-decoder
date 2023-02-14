@@ -1,3 +1,6 @@
+## 2.0.3
+- Fixes the issue with passing `iat` and `exp` as String values. ([#17](https://github.com/gustavo0197/dart-jwt-decoder/issues/17))
+- Also, ran `dart format` on the project to fix the formatting issues. ([#14](https://github.com/gustavo0197/dart-jwt-decoder/issues/14))
 # [2.0.2] - Changes expiration date's API
 
 - Makes `isExpired` return false when when there's no `exp` claim.

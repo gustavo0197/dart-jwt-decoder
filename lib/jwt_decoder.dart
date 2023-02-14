@@ -60,7 +60,14 @@ class JwtDecoder {
 
   static DateTime? _getDate({required String token, required String claim}) {
     final decodedToken = decode(token);
-    final expiration = decodedToken[claim] as int?;
+    int? expiration;
+
+    if (decodedToken[claim] is int) {
+      expiration = decodedToken[claim];
+    } else if (decodedToken[claim] is String) {
+      expiration = int.parse(decodedToken[claim]);
+    }
+
     if (expiration == null) {
       return null;
     }

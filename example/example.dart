@@ -15,7 +15,9 @@ main() {
   bool isTokenExpired = JwtDecoder.isExpired(token);
 
   if (!isTokenExpired) {
-    // The user should authenticate
+    print("Token is not expired");
+  } else {
+    print("Token is expired");
   }
 
   /* getExpirationDate() - this method returns the expiration date of the token */
