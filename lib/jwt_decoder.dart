@@ -46,13 +46,26 @@ class JwtDecoder {
 
   /// Tells whether a token is expired.
   ///
+  /// A [skew] of [Duration] can be provided which can give some
+  /// leeway, usually no more than a few minutes, to account
+  /// for clock skew on the client/server/entities validating tokens.
+  ///
   /// Returns false if the token is valid, true if it is expired.
   ///
   /// Throws [FormatException] if parameter is not a valid JWT token.
-  static bool isExpired(String token) {
+  static bool isExpired(String token, {Duration? skew}) {
     final expirationDate = getExpirationDate(token);
     if (expirationDate == null) {
       return false;
+    }
+
+    /// If the current date is after the expiration date with a
+    /// skew added, the token is already expired.
+    /// MAY provide some small leeway, usually no more than a few
+    /// minutes, to account for clock skew.
+    /// See JWT spec; https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.4
+    if (skew != null) {
+      return DateTime.now().isAfter(expirationDate.subtract(skew));
     }
     // If the current date is after the expiration date, the token is already expired
     return DateTime.now().isAfter(expirationDate);
