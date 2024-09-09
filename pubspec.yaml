@@ -6,7 +6,7 @@ version: 2.0.2
 homepage: https://github.com/gustavo0197/dart-jwt-decoder
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.5.2 <4.0.0"
 
 dev_dependencies:
-  test: ^1.16.5
+  test: ^1.25.8
